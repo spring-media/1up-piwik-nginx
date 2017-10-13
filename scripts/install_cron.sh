@@ -8,7 +8,7 @@ cat << EOF > /etc/cron.hourly/99piwik
 EOF
 chmod +x /etc/cron.hourly/99piwik
 
-(crontab -u nginx -l 2>/dev/null; echo "*/1 * * * * /usr/bin/php /usr/share/nginx/piwik/console queuedtracking:process >> /var/log/piwik.queuedtracking.process.log") | crontab -
+(crontab -u nginx -l 2>/dev/null; echo "*/1 * * * * /usr/bin/php /usr/share/nginx/piwik/console queuedtracking:process >> /var/log/piwik.queuedtracking.process.log") | crontab -u nginx -
 
 EOF
 chmod +x ${SCRIPT}
