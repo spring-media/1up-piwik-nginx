@@ -74,7 +74,6 @@ Plugins[] = "Marketplace"
 Plugins[] = "ProfessionalServices"
 Plugins[] = "UserId"
 Plugins[] = "CustomPiwikJs"
-Plugins[] = "LiveTab"
 Plugins[] = "QueuedTracking"
 
 [PluginsInstalled]
