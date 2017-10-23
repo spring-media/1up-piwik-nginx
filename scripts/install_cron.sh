@@ -9,7 +9,10 @@ set -euxo pipefail
 # chmod +x /etc/cron.hourly/99piwik
 
 # every hour : core:archive
-(crontab -u nginx -l 2>/dev/null; echo "45 * * * * /usr/bin/php /usr/share/nginx/piwik/console core:archive >> /var/log/piwik.core.archive.log") | crontab -u nginx -
+# Warning: Resets the current crontab (on purpose)
+(echo "45 * * * * /usr/bin/php /usr/share/nginx/piwik/console core:archive >> /var/log/piwik.core.archive.log") | crontab -u nginx -
 
 # every minute : queuedtracking:process
 (crontab -u nginx -l 2>/dev/null; echo "*/1 * * * * /usr/bin/php /usr/share/nginx/piwik/console queuedtracking:process >> /var/log/piwik.queuedtracking.process.log") | crontab -u nginx -
+
+echo -e "Current contents of /var/spool/cron/nginx: $(cat /var/spool/cron/nginx)\nEND"
