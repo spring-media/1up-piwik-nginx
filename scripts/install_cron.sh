@@ -4,15 +4,15 @@ set -euxo pipefail
 # todo: find out how to send emails (SES) and allow sending cron-results via email?
 # on how cron.hourly works: https://askubuntu.com/a/611430/389617
 # cat << EOF > /etc/cron.hourly/99piwik
-# /usr/bin/php /usr/share/nginx/piwik/console core:archive >> /var/log/piwik.core.archive.log
+# /usr/bin/php /usr/share/nginx/piwik/console core:archive >> /var/log/nginx/piwik.core.archive.log
 # EOF
 # chmod +x /etc/cron.hourly/99piwik
 
-# every hour : core:archive
+# every hour + some random seconds : core:archive
 # Warning: Resets the current crontab (on purpose)
-(echo "45 * * * * /usr/bin/php /usr/share/nginx/piwik/console core:archive >> /var/log/piwik.core.archive.log") | crontab -u nginx -
+(echo "45 * * * * sleep $(shuf -i 1-600 -n 1) && /usr/bin/php /usr/share/nginx/piwik/console core:archive >> /var/log/nginx/piwik.core.archive.log") | crontab -u nginx -
 
 # every minute : queuedtracking:process
-(crontab -u nginx -l 2>/dev/null; echo "*/1 * * * * /usr/bin/php /usr/share/nginx/piwik/console queuedtracking:process >> /var/log/piwik.queuedtracking.process.log") | crontab -u nginx -
+(crontab -u nginx -l 2>/dev/null; echo "*/1 * * * * /usr/bin/php /usr/share/nginx/piwik/console queuedtracking:process >> /var/log/nginx/piwik.queuedtracking.process.log") | crontab -u nginx -
 
-echo -e "Current contents of /var/spool/cron/nginx: $(cat /var/spool/cron/nginx)\nEND"
+echo -e "Current contents of /var/spool/cron/nginx: \nSTART\n$(cat /var/spool/cron/nginx)\nEND"
