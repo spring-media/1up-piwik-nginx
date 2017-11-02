@@ -11,7 +11,6 @@ tables_prefix = "piwik_"
 proxy_client_headers[] = "HTTP_X_FORWARDED_FOR"
 salt = "PIWIK_SALT"
 trusted_hosts[] = "piwik.up.welt.de"
-trusted_hosts[] = "www.welt.de"
 session_save_handler = dbtable
 
 [Plugins]
