@@ -10,7 +10,7 @@ set -euxo pipefail
 
 # every hour + some random seconds : core:archive
 # Warning: Resets the current crontab (on purpose)
-(echo "1 * * * * sleep \$(shuf -i 1-600 -n 1) ; /usr/bin/php /usr/share/nginx/piwik/console core:archive >> /var/log/nginx/piwik.core.archive.log") | crontab -u nginx -
+(echo "1,31 * * * * sleep \$(shuf -i 1-300 -n 1) ; /usr/bin/php /usr/share/nginx/piwik/console core:archive --php-cli-options='-d memory_limit=1536M' >> /var/log/nginx/piwik.core.archive.log") | crontab -u nginx -
 
 # every minute : queuedtracking:process
 (crontab -u nginx -l 2>/dev/null; echo "*/1 * * * * /usr/bin/php /usr/share/nginx/piwik/console queuedtracking:process >> /var/log/nginx/piwik.queuedtracking.process.log") | crontab -u nginx -
