@@ -4,7 +4,6 @@ COMMAND="/usr/bin/php /usr/share/nginx/piwik/console queuedtracking:process"
 OUTPUT_PREFIX="/var/log/nginx/piwik.queuedtracking.process"
 
 CPU_COUNT=$(lscpu -p | egrep -v '^#' | wc -l)
-echo "CPU_COUNT = $CPU_COUNT"
 
 for i in $(seq 1 $CPU_COUNT); do
     PIDFILE=/tmp/queuedtracking.$i.pid
@@ -30,11 +29,11 @@ for i in $(seq 1 $CPU_COUNT); do
             exit 1
         fi
     fi
-    echo "Starting queued tracking $i"
+    
     START=$(date +%s.%N)
     $COMMAND >> $OUTPUT_PREFIX.$i.log
     END=$(date +%s.%N)
     DIFF=$(echo "$END - $START" | bc)
-    echo "Finished queued tracking $i — took $DIFF seconds"
+    echo "`date +%F\ %T` Finished QueuedTracking $i — took $DIFF seconds"
     rm $PIDFILE
 done
