@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 PIDFILE=/tmp/core:delete-logs.pid
 
 if [ -f $PIDFILE ]; then
@@ -24,11 +23,13 @@ if [ -f $PIDFILE ]; then
     fi
 fi
 
+DELAY=$(shuf -i 1-3600 -n 1)
+echo sleeping $DELAY
+sleep $DELAY
+
 echo "Starting core:delete-logs"
-sleep $(shuf -i 1-3600 -n 1)
 START=$(date +%s.%N)
 /usr/bin/php /usr/share/nginx/piwik/console core:delete-logs-data \
-    --php-cli-options='-d memory_limit=1536M' \
     --dates=2017-01-01,$(date --date='7 days ago' +'%Y-%m-%d') \
     --optimize-tables \
     --no-interaction -v >> /var/log/nginx/piwik.core.delete-logs.log
