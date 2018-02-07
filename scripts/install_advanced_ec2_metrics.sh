@@ -1,5 +1,13 @@
 yum install perl-Switch perl-DateTime perl-Sys-Syslog perl-LWP-Protocol-https -y
 
+if getent passwd monitoring > /dev/null 2>&1; then
+    echo "yes the user exists"
+    userdel monitoring
+else
+    echo "No, the user does not exist"
+fi
+rm -rf /opt/aws-scripts-mon || true
+
 adduser --home-dir /opt/aws-scripts-mon --no-create-home --system  --shell /sbin/nologin monitoring
 
 cd /opt
