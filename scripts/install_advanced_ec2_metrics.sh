@@ -16,4 +16,4 @@ unzip CloudWatchMonitoringScripts-1.2.1.zip
 chown -R monitoring aws-scripts-mon
 rm CloudWatchMonitoringScripts-1.2.1.zip
 
-echo "*/5 * * * * /opt/aws-scripts-mon/mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --mem-avail --mem-used --disk-space-avail --disk-space-used --disk-space-util --disk-path=/ --from-cron" | crontab -u monitoring -
+echo "*/5 * * * * /opt/aws-scripts-mon/mon-put-instance-data.pl --mem-used-incl-cache-buff --mem-util --mem-avail --mem-used --disk-space-avail --disk-space-used --disk-space-util --disk-path=/ --auto-scaling=only --from-cron" | crontab -u monitoring -
