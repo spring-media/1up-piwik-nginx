@@ -4,7 +4,7 @@ set -euo pipefail
 
 # every hour + some random seconds : core:archive
 # Warning: Resets the current crontab (on purpose)
-(echo "*/30 * * * * sleep \$(shuf -i 1-300 -n 1) ; /usr/bin/php /usr/share/nginx/piwik/console core:archive --php-cli-options='-d memory_limit=1536M' >> /var/log/nginx/piwik.core.archive.log 2>&1") | crontab -u nginx -
+(echo "*/30 * * * * sleep \$(shuf -i 1-300 -n 1) ; /usr/bin/php /usr/share/nginx/piwik/console core:archive >> /var/log/nginx/piwik.core.archive.log 2>&1") | crontab -u nginx -
 
 # nightly delete old logs: https://matomo.org/faq/how-to/faq_20184/
 (crontab -u nginx -l 2>/dev/null; echo "17 0 * * *  /opt/piwik-nginx/scripts/delete_logs.sh >> /var/log/nginx/piwik.core.delete-logs.cron.log 2>&1") | crontab -u nginx -
