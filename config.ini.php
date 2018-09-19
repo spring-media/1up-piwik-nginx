@@ -12,6 +12,7 @@ proxy_client_headers[] = "HTTP_X_FORWARDED_FOR"
 salt = "PIWIK_SALT"
 trusted_hosts[] = "piwik.up.welt.de"
 session_save_handler = dbtable
+assume_secure_protocol = 1
 
 [Plugins]
 Plugins[] = "CorePluginsAdmin"
