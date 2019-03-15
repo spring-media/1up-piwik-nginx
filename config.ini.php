@@ -75,6 +75,7 @@ Plugins[] = "ProfessionalServices"
 Plugins[] = "UserId"
 Plugins[] = "CustomPiwikJs"
 Plugins[] = "QueuedTracking"
+Plugins[] = "CustomDimensions"
 
 [PluginsInstalled]
 PluginsInstalled[] = "Diagnostics"
@@ -137,3 +138,4 @@ PluginsInstalled[] = "ProfessionalServices"
 PluginsInstalled[] = "UserId"
 PluginsInstalled[] = "CustomPiwikJs"
 PluginsInstalled[] = "QueuedTracking"
+PluginsInstalled[] = "CustomDimensions"
